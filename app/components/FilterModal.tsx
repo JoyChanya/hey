@@ -24,11 +24,31 @@ interface FilterModalProps {
   clearFilters: () => void;
 }
 
-const PRODUCT_PILLS: { key: ProductType; label: string }[] = [
-  { key: "MOTOR", label: "ประกันรถยนต์" },
-  { key: "TRAVEL", label: "ประกันเดินทาง" },
-  { key: "ACCIDENT", label: "ประกันอุบัติเหตุ" },
+const PRODUCT_STYLES: Record<ProductType, { bg: string; text: string; border: string }> = {
+  MOTOR:    { bg: "bg-[#029563]/20", text: "text-[#029563]", border: "border-[#029563]" },
+  TRAVEL:   { bg: "bg-[#F1E05A]/20", text: "text-[#F1E05A]", border: "border-[#F1E05A]" },
+  ACCIDENT: { bg: "bg-[#2177EB]/20", text: "text-[#2177EB]", border: "border-[#2177EB]" },
+};
+
+
+const PRODUCT_PILLS: { key: ProductType; label: string; activeClass: string }[] = [
+  {
+    key: "MOTOR",
+    label: "ประกันรถยนต์",
+    activeClass: `${PRODUCT_STYLES.MOTOR.bg} ${PRODUCT_STYLES.MOTOR.text} ${PRODUCT_STYLES.MOTOR.border}`,
+  },
+  {
+    key: "TRAVEL",
+    label: "ประกันเดินทาง",
+    activeClass: `${PRODUCT_STYLES.TRAVEL.bg} ${PRODUCT_STYLES.TRAVEL.text} ${PRODUCT_STYLES.TRAVEL.border}`,
+  },
+  {
+    key: "ACCIDENT",
+    label: "ประกันอุบัติเหตุ",
+    activeClass: `${PRODUCT_STYLES.ACCIDENT.bg} ${PRODUCT_STYLES.ACCIDENT.text} ${PRODUCT_STYLES.ACCIDENT.border}`,
+  },
 ];
+
 
 const RATING_BUCKETS = [5, 4, 3, 2, 1] as const;
 
@@ -75,7 +95,7 @@ export default function FilterModal({
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center text-center">
+          <div className="flex min-h-full items-end justify-center text-left">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-200"
@@ -87,7 +107,7 @@ export default function FilterModal({
             >
               <Dialog.Panel className="w-full max-w-md bg-[#222] text-white rounded-t-2xl p-6 shadow-xl">
                 {/* Header */}
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between border-b border-gray-500 pb-4 mb-4">
                   <Dialog.Title className="text-lg font-semibold">กรองรีวิว</Dialog.Title>
                   <button onClick={onClose}>
                     <XMarkIcon className="w-6 h-6 text-white" />
@@ -95,10 +115,10 @@ export default function FilterModal({
                 </div>
 
                 {/* Full filters */}
-                <div className="space-y-6 overflow-y-auto max-h-[70vh] pr-2">
+                <div className="space-y-6 overflow-y-auto max-h-[70vh] pr-2 ">
                   {/* Product */}
                   <section>
-                    <h4 className="font-semibold mb-2">ประเภทประกัน</h4>
+                    <h4 className="font-bold mb-2">ประเภทประกัน</h4>
                     <PillRow>
                       {PRODUCT_PILLS.map(({ key, label }) => (
                         <Pill
@@ -115,7 +135,7 @@ export default function FilterModal({
 
                   {/* Rating */}
                   <section>
-                    <h4 className="font-semibold mb-2">คะแนนโดยลูกค้า</h4>
+                    <h4 className="font-bold mb-2">คะแนนโดยลูกค้า</h4>
                     <PillRow>
                       {RATING_BUCKETS.map((r) => (
                         <StarPill
@@ -130,14 +150,14 @@ export default function FilterModal({
 
                   {/* Tags */}
                   <section>
-                    <h4 className="font-semibold mb-2">การกล่าวถึง</h4>
+                    <h4 className="font-bold mb-2">การกล่าวถึง</h4>
                     <PillRow>
                       {TAG_PILLS.map((t) => (
                         <Pill
                           key={t}
                           active={selectedTags.includes(t)}
                           onClick={() => toggleTag(t)}
-                          activeClass="bg-sky-400 text-black"
+                          activeClass="bg-white text-black"
                         >
                           {t}
                         </Pill>
@@ -147,7 +167,7 @@ export default function FilterModal({
 
                   {/* Sort */}
                   <section>
-                    <h4 className="font-semibold mb-2">เรียงตาม</h4>
+                    <h4 className="font-bold mb-2">เรียงตาม</h4>
                     <div className="flex gap-2">
                       <button
                         className={`px-4 py-1 rounded-full border border-gray-500/60 text-sm ${
@@ -176,13 +196,13 @@ export default function FilterModal({
                       clearFilters();
                       onClose();
                     }}
-                    className="flex-1 py-2 rounded-full bg-[#444] text-white text-sm"
+                    className="flex-1 py-2 rounded-full bg-[#2C2C2C] border border-[#F9C1C1] text-[#F9C1C1] text-sm font-bold"
                   >
                     ดูทั้งหมด
                   </button>
                   <button
                     onClick={onClose}
-                    className="flex-1 py-2 rounded-full bg-green-500 text-black text-sm"
+                    className="flex-1 py-2 rounded-full bg-[#2C2C2C] border border-[#54B192] text-[#45B892] text-sm font-bold"
                   >
                     ใช้
                   </button>

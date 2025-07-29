@@ -25,9 +25,9 @@ interface ReviewItem {
 }
 
 const BG_MAP: Record<ProductType, string> = {
-  MOTOR: "bg-blue-50",
-  TRAVEL: "bg-teal-50",
-  ACCIDENT: "bg-rose-50",
+  MOTOR: "bg-[#E6FFF3]",
+  TRAVEL: "bg-[#FFFDEF]",
+  ACCIDENT: "bg-[#FFF5F5]"
 };
 
 const SOURCE_MAP = {
@@ -87,13 +87,15 @@ export default function Page() {
   });
 
   return (
-    <div className="min-h-screen bg-[#F1FCF3]">
+    <div className="min-h-screen bg-gradient-to-b from-[#FFFFFF] to-[#F1FCF3]">
       <Navbar />
 
       {/* HERO */}
       <section className="container mx-auto px-4 py-12 text-left">
-        <h2 className="text-3xl font-semibold text-gray-800">รีวิวจากลูกค้า hey</h2>
-        <p className="mt-2 text-2xl font-bold text-green-600">
+        <h2 className="text-3xl font-bold 
+                        bg-gradient-to-r from-[#029563] to-[#2177EB] 
+                        inline-block text-transparent bg-clip-text">รีวิวจากลูกค้า hey</h2>
+        <p className="mt-2 text-3xl font-bold text-[#029563]">
           4.8 <span className="text-lg font-normal text-gray-500">/ 5 คะแนนจาก 100,000 รีวิว</span>
         </p>
         <div className="mt-4 text-right">
@@ -111,11 +113,11 @@ export default function Page() {
             onClick={goPrev}
             disabled={isFirst}
             className={`hidden md:flex items-center justify-center absolute -left-10 top-1/2 -translate-y-1/2 
-                        h-10 w-10 rounded-full bg-white shadow z-10
-                        ${isFirst ? "opacity-30 cursor-not-allowed" : "hover:bg-gray-100"}`}
+                        h-10 w-10 rounded-full bg-[#12875D] shadow z-10
+                        ${isFirst ? "opacity-30 cursor-not-allowed" : "hover:bg-[#0F6B4A]"}`}
             aria-label="previous"
           >
-            <ArrowLeftIcon className="w-6 h-6 text-gray-600" />
+            <ArrowLeftIcon className="w-6 h-6 text-white" />
           </button>
 
           {/* Right arrow */}
@@ -123,11 +125,11 @@ export default function Page() {
             onClick={goNext}
             disabled={isLast}
             className={`hidden md:flex items-center justify-center absolute -right-10 top-1/2 -translate-y-1/2 
-                        h-10 w-10 rounded-full bg-white shadow z-10
-                        ${isLast ? "opacity-30 cursor-not-allowed" : "hover:bg-gray-100"}`}
+                        h-10 w-10 rounded-full bg-[#12875D] shadow z-10
+                        ${isLast ? "opacity-30 cursor-not-allowed" : "hover:bg-[#0F6B4A]"}`}
             aria-label="next"
           >
-            <ArrowRightIcon className="w-6 h-6 text-gray-600" />
+            <ArrowRightIcon className="w-6 h-6 text-white" />
           </button>
 
           <div className="px-4 md:px-16" {...handlers}>
@@ -159,13 +161,15 @@ export default function Page() {
           {isLast && (
             <Link
               href="/reviews"
-              className="px-6 py-2 rounded-full bg-green-500 text-white text-sm hover:bg-green-600 transition"
+              className="px-6 py-2 rounded-full bg-gradient-to-r from-[#029563] to-[#2177EB] text-white text-sm font-semibold hover:bg-green-600 transition"
             >
               รีวิวทั้งหมด
             </Link>
           )}
         </div>
       </section>
+
+
     </div>
   );
 }
@@ -178,7 +182,7 @@ function ReviewCard({ review }: { review: ReviewItem }) {
   const srcCfg = SOURCE_MAP[srcKey];
 
   return (
-    <div className={`relative ${bg} rounded-xl shadow p-6 flex flex-col h-[200px] md:h-[240px]`}>
+    <div className={`relative ${bg} rounded-xl shadow p-6 flex flex-col h-[220px] md:h-[240px]`}>
       <div className="flex justify-between items-start">
         <h3 className="font-semibold text-gray-800">{review.name}</h3>
         <span className="text-sm text-gray-500">

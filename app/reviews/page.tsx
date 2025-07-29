@@ -51,10 +51,29 @@ export type Source = "facebook" | "tiktok" | "instagram" | "survey" | "other";
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 const PER_PAGE = 12; // 3 columns x 4 rows
 
-const PRODUCT_PILLS: { key: ProductType; label: string }[] = [
-  { key: "MOTOR", label: "ประกันรถยนต์" },
-  { key: "TRAVEL", label: "ประกันเดินทาง" },
-  { key: "ACCIDENT", label: "ประกันอุบัติเหตุ" }
+const PRODUCT_STYLES: Record<ProductType, { bg: string; text: string; border: string }> = {
+  MOTOR:    { bg: "bg-[#A6D3BE]", text: "text-black font-bold", border: "border-white" },
+  TRAVEL:   { bg: "bg-[#E7DB8F]", text: "text-black font-bold", border: "border-white" },
+  ACCIDENT: { bg: "bg-[#F9C1C1]", text: "text-black font-bold", border: "border-white" },
+};
+
+
+const PRODUCT_PILLS: { key: ProductType; label: string; activeClass: string }[] = [
+  {
+    key: "MOTOR",
+    label: "ประกันรถยนต์",
+    activeClass: `${PRODUCT_STYLES.MOTOR.bg} ${PRODUCT_STYLES.MOTOR.text} ${PRODUCT_STYLES.MOTOR.border}`,
+  },
+  {
+    key: "TRAVEL",
+    label: "ประกันเดินทาง",
+    activeClass: `${PRODUCT_STYLES.TRAVEL.bg} ${PRODUCT_STYLES.TRAVEL.text} ${PRODUCT_STYLES.TRAVEL.border}`,
+  },
+  {
+    key: "ACCIDENT",
+    label: "ประกันอุบัติเหตุ",
+    activeClass: `${PRODUCT_STYLES.ACCIDENT.bg} ${PRODUCT_STYLES.ACCIDENT.text} ${PRODUCT_STYLES.ACCIDENT.border}`,
+  },
 ];
 
 // Compact mobile options
@@ -176,7 +195,7 @@ export default function ReviewsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[#111] text-white">
+      <main className="min-h-screen bg-[#111] text-[#F1EFE3]">
       <section className="container mx-auto px-4 pt-10">
         <h1 className="text-3xl font-semibold">รีวิวจากลูกค้า hey</h1>
 
@@ -184,20 +203,18 @@ export default function ReviewsPage() {
         <div className="mt-6 space-y-3 md:hidden">
           {/* product compact */}
           <PillRow>
-            {MOBILE_PRODUCTS.map((p) => {
-              const pill = PRODUCT_PILLS.find((x) => x.key === p)!;
-              return (
-                <Pill
-                  key={p}
-                  active={selectedProducts.includes(p)}
-                  onClick={() => toggleProduct(p)}
-                  activeClass="bg-sky-400 text-black"
-                >
-                  {pill.label}
-                </Pill>
-              );
-            })}
+            {PRODUCT_PILLS.map(({ key, label, activeClass }) => (
+              <Pill
+                key={key}
+                active={selectedProducts.includes(key)}
+                onClick={() => toggleProduct(key)}
+                activeClass={activeClass}
+              >
+                {label}
+              </Pill>
+            ))}
           </PillRow>
+
 
           {/* rating compact */}
           <PillRow>
@@ -235,12 +252,12 @@ export default function ReviewsPage() {
 
           {/* Product */}
           <PillRow>
-            {PRODUCT_PILLS.map(({ key, label }) => (
+            {PRODUCT_PILLS.map(({ key, label, activeClass }) => (
               <Pill
                 key={key}
                 active={selectedProducts.includes(key)}
                 onClick={() => toggleProduct(key)}
-                activeClass="bg-sky-400 text-black"
+                activeClass={activeClass}
               >
                 {label}
               </Pill>
@@ -276,7 +293,7 @@ export default function ReviewsPage() {
           <div className="flex items-center justify-end gap-4">
             <button
               onClick={clearFilters}
-              className="text-xs text-pink-300 hover:underline flex items-center gap-1"
+              className="text-xs text-[#F9C1C1] hover:underline flex items-center gap-1"
             >
               <span className="rotate-180 inline-block">↻</span> ล้างการกรองทั้งหมด
             </button>

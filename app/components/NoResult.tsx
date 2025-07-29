@@ -4,7 +4,7 @@ export default function NoResult({ onClear }: { onClear: () => void }) {
       <p className="text-gray-300">ไม่พบผลลัพธ์ ลองลดตัวกรอง หรือเปลี่ยนการค้นหา</p>
       <button
         onClick={onClear}
-        className="text-sm text-green-400 hover:underline"
+        className="text-sm text-[#F9C1C1] hover:underline"
       >
         ล้างตัวกรองทั้งหมด
       </button>

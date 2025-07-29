@@ -19,9 +19,9 @@ export interface ReviewItem {
 }
 
 const BG_MAP: Record<ProductType, string> = {
-  MOTOR: "bg-blue-50",
-  TRAVEL: "bg-teal-50",
-  ACCIDENT: "bg-rose-50"
+  MOTOR: "bg-[#E6FFF3]",
+  TRAVEL: "bg-[#FFFDEF]",
+  ACCIDENT: "bg-[#FFF5F5]"
 };
 
 export const SOURCE_MAP: Record<Source, SourceCfg> = {

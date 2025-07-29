@@ -27,7 +27,7 @@ export default function Pagination({
           key={p}
           onClick={() => onChange(p)}
           className={`h-8 w-8 rounded-full flex items-center justify-center
-            ${p === current ? "bg-green-500 text-black" : "hover:bg-white/10"}`}
+            ${p === current ? "bg-[#12875D] text-white font-semibold" : "hover:bg-white/10"}`}
           aria-label={`page ${p}`}
         >
           {p}
