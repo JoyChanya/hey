@@ -2,6 +2,10 @@
 import type { Metadata } from "next";
 import { Prompt } from "next/font/google";
 import "./globals.css";
+import "react-chat-widget/lib/styles.css"; // the chat widget styles
+import Chatbot from "./components/Chatbot";
+
+import type { ReactNode } from "react";
 
 const prompt = Prompt({
   subsets: ["thai", "latin"],

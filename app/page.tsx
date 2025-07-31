@@ -7,7 +7,10 @@ import Link from "next/link";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { useSwipeable } from "react-swipeable";
+import dynamic from "next/dynamic";
 import Navbar from "./components/Navbar";
+
+
 
 // Backend types
 type ProductType = "MOTOR" | "TRAVEL" | "ACCIDENT";
@@ -41,6 +44,10 @@ const SOURCE_MAP = {
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 const PAGE_SIZE = 3;
 const TOTAL_PAGES = 3;
+
+const Chatbot = dynamic(() => import("./components/Chatbot"), {
+  ssr: false,
+});
 
 export default function Page() {
   const [reviews, setReviews] = useState<ReviewItem[]>([]);
@@ -85,6 +92,7 @@ export default function Page() {
     trackTouch: true,
     preventScrollOnSwipe: true,
   });
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FFFFFF] to-[#F1FCF3]">
@@ -214,6 +222,7 @@ function ReviewCard({ review }: { review: ReviewItem }) {
           )
         )}
       </div>
+      <Chatbot />
     </div>
   );
 }

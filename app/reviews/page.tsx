@@ -1,7 +1,7 @@
 // app/reviews/page.tsx
 "use client";
 
-import React, { useEffect, useMemo, useState, Fragment } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import {
   AdjustmentsHorizontalIcon
